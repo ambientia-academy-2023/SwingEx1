@@ -15,6 +15,7 @@ public class MainUI extends javax.swing.JFrame {
      */
     public MainUI() {
         initComponents();
+        panelArray.setVisible(false);
     }
 
     /**
@@ -30,6 +31,12 @@ public class MainUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnSave = new javax.swing.JButton();
         labelResult = new javax.swing.JLabel();
+        panelArray = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        textFnames = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        listFnames = new javax.swing.JList<>();
+        btnShowFnames = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -42,20 +49,66 @@ public class MainUI extends javax.swing.JFrame {
             }
         });
 
+        panelArray.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        textFnames.setColumns(20);
+        textFnames.setRows(5);
+        jScrollPane1.setViewportView(textFnames);
+
+        listFnames.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(listFnames);
+
+        javax.swing.GroupLayout panelArrayLayout = new javax.swing.GroupLayout(panelArray);
+        panelArray.setLayout(panelArrayLayout);
+        panelArrayLayout.setHorizontalGroup(
+            panelArrayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelArrayLayout.createSequentialGroup()
+                .addGap(43, 43, 43)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(62, Short.MAX_VALUE))
+        );
+        panelArrayLayout.setVerticalGroup(
+            panelArrayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelArrayLayout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(panelArrayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
+        btnShowFnames.setText("Näytä etunimet");
+        btnShowFnames.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowFnamesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(65, 65, 65)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(65, 65, 65)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(81, 81, 81)
                         .addComponent(textFname, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42)
                         .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(labelResult, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(56, 56, 56)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(panelArray, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labelResult, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnShowFnames, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(170, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -66,9 +119,13 @@ public class MainUI extends javax.swing.JFrame {
                     .addComponent(textFname, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSave))
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelResult, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(353, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnShowFnames)
+                .addGap(44, 44, 44)
+                .addComponent(panelArray, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(149, Short.MAX_VALUE))
         );
 
         pack();
@@ -78,6 +135,11 @@ public class MainUI extends javax.swing.JFrame {
         String fn=textFname.getText();
         labelResult.setText("Terve "+fn);
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnShowFnamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowFnamesActionPerformed
+        // TODO add your handling code here:
+        panelArray.setVisible(true);
+    }//GEN-LAST:event_btnShowFnamesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -116,8 +178,14 @@ public class MainUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnShowFnames;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelResult;
+    private javax.swing.JList<String> listFnames;
+    private javax.swing.JPanel panelArray;
     private javax.swing.JTextField textFname;
+    private javax.swing.JTextArea textFnames;
     // End of variables declaration//GEN-END:variables
 }
