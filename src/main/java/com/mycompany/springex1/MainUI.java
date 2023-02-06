@@ -213,8 +213,8 @@ public class MainUI extends javax.swing.JFrame {
 
     private void btnOpenJFrameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenJFrameActionPerformed
         // TODO add your handling code here:
-        MyJFrame objectMyJFrame = new MyJFrame("Jussi");
-        //objectMyJFrame.setMyframeFname("Jussi");
+        MyJFrame objectMyJFrame = new MyJFrame(textFname.getText());
+        //objectMyJFrame.setMyframeFname("Teppo");
         objectMyJFrame.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_btnOpenJFrameActionPerformed
 

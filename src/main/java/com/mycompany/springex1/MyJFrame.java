@@ -15,6 +15,10 @@ public class MyJFrame extends javax.swing.JFrame {
      */
     private String myframeFname="Tester";
 
+    private MyJFrame() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     public String getMyframeFname() {
         return myframeFname;
     }
