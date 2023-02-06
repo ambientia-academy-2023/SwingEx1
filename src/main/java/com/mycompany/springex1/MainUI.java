@@ -4,6 +4,11 @@
  */
 package com.mycompany.springex1;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+
+
+
 /**
  *
  * @author pekka
@@ -36,6 +41,7 @@ public class MainUI extends javax.swing.JFrame {
         textFnames = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         listFnames = new javax.swing.JList<>();
+        labelSelectedFname = new javax.swing.JLabel();
         btnShowFnames = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,18 +66,30 @@ public class MainUI extends javax.swing.JFrame {
             public int getSize() { return strings.length; }
             public String getElementAt(int i) { return strings[i]; }
         });
+        listFnames.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                fnameChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(listFnames);
+
+        labelSelectedFname.setText("jLabel2");
 
         javax.swing.GroupLayout panelArrayLayout = new javax.swing.GroupLayout(panelArray);
         panelArray.setLayout(panelArrayLayout);
         panelArrayLayout.setHorizontalGroup(
             panelArrayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelArrayLayout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(77, 77, 77)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addGroup(panelArrayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelArrayLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labelSelectedFname, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelArrayLayout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(77, 77, 77)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         panelArrayLayout.setVerticalGroup(
             panelArrayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -80,7 +98,9 @@ public class MainUI extends javax.swing.JFrame {
                 .addGroup(panelArrayLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jScrollPane1))
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addComponent(labelSelectedFname, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         btnShowFnames.setText("Näytä etunimet");
@@ -106,9 +126,9 @@ public class MainUI extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(56, 56, 56)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelArray, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labelResult, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnShowFnames, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnShowFnames, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(panelArray, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(170, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -125,7 +145,7 @@ public class MainUI extends javax.swing.JFrame {
                 .addComponent(btnShowFnames)
                 .addGap(44, 44, 44)
                 .addComponent(panelArray, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
 
         pack();
@@ -139,7 +159,32 @@ public class MainUI extends javax.swing.JFrame {
     private void btnShowFnamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowFnamesActionPerformed
         // TODO add your handling code here:
         panelArray.setVisible(true);
+        ArrayList<Person> persons = new ArrayList<>();
+        persons.add(new Person("Teppo"));
+        persons.add(new Person("Liisa"));
+        persons.add(new Person("Matti"));
+        persons.add(new Person("Aino"));
+        //lisätään nimet textAreaan
+        String names="";
+        for(Person p:persons){
+            names+=p.getFname()+"\n";
+        }
+        System.out.println(names);
+        textFnames.setText(names);
+        
+        //lisätään nimet jListiin
+        DefaultListModel personModel=new DefaultListModel();
+        for(Person p:persons){
+            personModel.addElement(p.getFname());
+        }
+        listFnames.setModel(personModel);
     }//GEN-LAST:event_btnShowFnamesActionPerformed
+
+    private void fnameChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_fnameChanged
+        // TODO add your handling code here:
+        String selectedFname=listFnames.getSelectedValue();
+        labelSelectedFname.setText(selectedFname);
+    }//GEN-LAST:event_fnameChanged
 
     /**
      * @param args the command line arguments
@@ -183,6 +228,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labelResult;
+    private javax.swing.JLabel labelSelectedFname;
     private javax.swing.JList<String> listFnames;
     private javax.swing.JPanel panelArray;
     private javax.swing.JTextField textFname;
