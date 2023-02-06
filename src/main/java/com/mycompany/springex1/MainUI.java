@@ -43,6 +43,8 @@ public class MainUI extends javax.swing.JFrame {
         listFnames = new javax.swing.JList<>();
         labelSelectedFname = new javax.swing.JLabel();
         btnShowFnames = new javax.swing.JButton();
+        btnOpenJFrame = new javax.swing.JButton();
+        btnOpenJDialog = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,6 +112,20 @@ public class MainUI extends javax.swing.JFrame {
             }
         });
 
+        btnOpenJFrame.setText("Avaa JFrame");
+        btnOpenJFrame.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOpenJFrameActionPerformed(evt);
+            }
+        });
+
+        btnOpenJDialog.setText("Avaa JDialog");
+        btnOpenJDialog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOpenJDialogActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -128,7 +144,12 @@ public class MainUI extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labelResult, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnShowFnames, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(panelArray, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(panelArray, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addComponent(btnOpenJFrame, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(btnOpenJDialog, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(170, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -145,7 +166,11 @@ public class MainUI extends javax.swing.JFrame {
                 .addComponent(btnShowFnames)
                 .addGap(44, 44, 44)
                 .addComponent(panelArray, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(99, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnOpenJFrame)
+                    .addComponent(btnOpenJDialog))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         pack();
@@ -186,6 +211,19 @@ public class MainUI extends javax.swing.JFrame {
         labelSelectedFname.setText(selectedFname);
     }//GEN-LAST:event_fnameChanged
 
+    private void btnOpenJFrameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenJFrameActionPerformed
+        // TODO add your handling code here:
+        MyJFrame objectMyJFrame = new MyJFrame("Jussi");
+        //objectMyJFrame.setMyframeFname("Jussi");
+        objectMyJFrame.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_btnOpenJFrameActionPerformed
+
+    private void btnOpenJDialogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOpenJDialogActionPerformed
+        // TODO add your handling code here:
+        MyJDialog objectMyJDialog = new MyJDialog(this, rootPaneCheckingEnabled);
+        objectMyJDialog.setVisible(rootPaneCheckingEnabled);
+    }//GEN-LAST:event_btnOpenJDialogActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -222,6 +260,8 @@ public class MainUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnOpenJDialog;
+    private javax.swing.JButton btnOpenJFrame;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnShowFnames;
     private javax.swing.JLabel jLabel1;
